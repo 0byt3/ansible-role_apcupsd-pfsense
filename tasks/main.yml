@@ -1,0 +1,11 @@
+---
+# tasks file for apcupsd-pfsense
+- name: "Install APCUPSd"
+  ansible.builtin.package:
+    name: "apcupsd"
+    state: "present"
+
+- name: "Build static variables"
+  ansible.builtin.set_fact:
+    apc_options_to_set: "{{ apc_options | selectattr('value', 'match', '.+') }}"
+
